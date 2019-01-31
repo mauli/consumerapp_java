@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: mauli.pravasi
+Build-Jdk: 10.0.2
+Implementation-Title: demoConsumer
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.example.okta
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/okta-spring-boot-oauth-front-end
+Created-By: Maven Integration for Eclipse
+

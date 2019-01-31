@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Get Groups for Okta User using the Okta Sign-In Widget</title>
+  <script
+  src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.14.0/js/okta-sign-in.min.js"
+  type="text/javascript"></script>
+<link
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.14.0/css/okta-sign-in.min.css"
+  type="text/css"
+  rel="stylesheet"/>
+
+<!-- Theme file: Customize or replace this file if you want to override the default styles -->
+<link
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.14.0/css/okta-theme.css"
+  type="text/css"
+  rel="stylesheet"/>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <div id="okta-login-container"></div>
+    <script type="text/javascript">
+      var OKTA_ORG_URL = 'https://dev-584397.oktapreview.com/';
+      var OKTA_CLIENT_ID = '0oaj1oj85ckHEKolC0h7';
+   
+
+      var oktaSignIn = new OktaSignIn({
+    	    baseUrl: "https://dev-584397.oktapreview.com",
+    	    clientId: "0oaj1oj85ckHEKolC0h7",
+    	    redirectUri: 'http://localhost:8080/welcome',
+    	    authParams: {
+    	      issuer: "https://dev-584397.oktapreview.com/oauth2/default",
+    	      responseType: ['token', 'id_token'],
+              scopes: ['openid'],
+              response_mode: "form_post"
+              
+    	    }
+    	  });
+      
+      oktaSignIn.renderEl(
+          { el: '#okta-login-container' },
+          function (res) {
+        	  oktaSignIn.hide();
+              if (res.status === 'SUCCESS') {
+                  var accessToken = res[0];
+                  console.log(accessToken);
+                  console.log('User successfully authenticated');
+                  ajaxPost(res);
+
+                
+              }
+          }
+      );
+      function ajaxPost(res){
+      	// DO POST
+      	$.ajax({
+  			type : "POST",
+  			contentType : "application/json",
+  			accept: 'text/plain',
+  			url : window.location + "save",
+  			data : JSON.stringify(res),
+  			dataType: 'text',
+  			success : function(result) {				
+  				
+  			},
+  			error : function(e) {
+  			
+  			}
+  		});
+      }
+        
+    </script>
+</body>
+</html>
